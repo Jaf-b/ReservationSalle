@@ -1,9 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { doc, getDocs, getFirestore, onSnapshot, setDoc } from "firebase/firestore";
+import { doc, DocumentReference, getDoc, getDocs, getFirestore, setDoc } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithRedirect, onAuthStateChanged, linkWithRedirect, signInWithEmailLink  } from 'firebase/auth'
-import firebase from "firebase/compat/app";
 import Swiper from "swiper";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -278,8 +277,19 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
       });
   });
   // function if login
-  onAuthStateChanged(auth, (user)=>{
+  onAuthStateChanged(auth, async(user)=>{
     if(user){
+        // ajouter m'utilisateur qui vient de se connecter 
+        const documentRef  = new DocumentReference();
+        const userDocRef = doc(db,"salleUser",user.uid)
+        const userDoc = await getDoc(userDocRef);
+        console.log(userDoc);
+       if(!userDoc.exists()){newUser(user);
+        console.log(userDoc)
+        }else{
+          console.log(userDoc)
+        } 
+      
       Reserver.addEventListener("click", () =>
         {
          const ReservationPopup = document.getElementById("ReservationPopup");
@@ -287,7 +297,6 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
           ReservationPopup.classList.add("flex");
         } 
       );
-      console.log(user);
       loginBtns.classList.remove('flex');
       loginBtns.classList.add('hidden');
       if(SignOut){
@@ -320,11 +329,21 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
      popupSection.classList.add("flex");
         
       });
-      
     }
-  });
+    else{
+      Reserver.addEventListener("click", () =>
+        {
+         loginFunction()
+        } 
+      );
+    }
+  })
 //redirection
-
+//fonction new User 
+ function newUser ({displayName,email,uid,phoneNumber}){
+  const userRef = doc(db,'salleUser',uid);
+  setDoc(userRef,{displayName,email,phoneNumber},{merge:true})
+}
 //function to get the cards
 function Sallecards(array,htmlContainer){
 
@@ -391,6 +410,30 @@ function SallecardsWithReduction(array,htmlContainer){
     `
   }
   }
+}
+function loginFunction(){
+  search.classList.remove('flex');
+  search.classList.add('hidden');
+  aboutUs.classList.remove('flex');
+  aboutUs.classList.add('hidden');
+  Details.classList.remove('flex');
+  Details.classList.add('hidden');
+  inscription.classList.remove('flex');
+  inscription.classList.add('hidden');
+  Recherche.classList.remove('flex');
+  Recherche.classList.add('hidden');
+  home.classList.remove('flex');
+  home.classList.add('hidden');
+  main.classList.remove('flex');
+  main.classList.add('hidden');
+  connexion.classList.remove('hidden');
+  connexion.classList.add('flex');
+  btnLogin.classList.remove('flex');
+  btnLogin.classList.add('hidden');
+  btnSignUp.classList.remove('hidden');
+  btnSignUp.classList.add('flex');
+  AddSalle.classList.remove('flex');
+  AddSalle.classList.add('hidden');
 }
 function ReductionCard(array, htmlContainer){
   let mainContainer = htmlContainer;
