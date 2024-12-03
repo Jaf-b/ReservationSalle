@@ -335,7 +335,7 @@ function Sallecards(array,htmlContainer){
       <div class="swiper-slide cursor-pointer min-w-[180px] w-[180px] md:min-w-[278px] md:w-[278px] h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow  gap-5 transition-all hover:scale-90" id="${i}">
         
         <div id="img">
-            <img class="md:w-[278px] md:h-[150px] rounded-xl object-cover flex flex-col gap-3" src="${array[i].image}" alt="">
+            <img class="h-[100px] w-full md:w-[278px] md:h-[150px] rounded-xl object-cover flex flex-col gap-3" src="${array[i].image}" alt="">
         </div>
         <div id="body_Card">
             <h1 class="text-xl md:text-xl font-bold line-clamp-1">${array[i].name}</h1> 
@@ -368,7 +368,7 @@ function SallecardsWithReduction(array,htmlContainer){
       <div class="swiper-slide cursor-pointer min-w-[180px] w-[180px] md:min-w-[278px] md:w-[278px]  h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow  gap-5 transition-all hover:scale-90" id="${i}">
         
         <div id="img">
-            <img class="md:w-[278px] md:h-[150px] rounded-xl object-cover flex flex-col gap-3" src="${array[i].image}" alt="">
+          <img class="h-[100px] w-full md:w-[278px] md:h-[150px] rounded-xl object-cover flex flex-col gap-3" src="${array[i].image}" alt="">
         </div>
         <div id="body_Card">
             <h1 class="text-xl md:text-xl font-bold line-clamp-1">${array[i].name}</h1> 
@@ -554,7 +554,7 @@ function GetDetailsCard(array,mainContainer){
     `;
    
     // ajouter les images
-    img.innerHTML = `<img src="${array[elements.id].image}" class="w-[30%] rounded-xl object-cover">`;
+    img.innerHTML = `<img src="${array[elements.id].image}" class="w-full h-[300px] md:h-[500px] w- rounded-xl object-cover">`;
     
     // ajouter une description
     description.innerHTML =`<p class="line-clamp-[10] md:line-clamp-none text-justify">${array[elements.id].description}</p>`;
