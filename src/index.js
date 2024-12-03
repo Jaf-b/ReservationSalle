@@ -554,7 +554,7 @@ function GetDetailsCard(array,mainContainer){
     `;
    
     // ajouter les images
-    img.innerHTML = `<img src="${array[elements.id].image}" class="rounded-xl object-cover">`;
+    img.innerHTML = `<img src="${array[elements.id].image}" class="w-[30%] rounded-xl object-cover">`;
     
     // ajouter une description
     description.innerHTML =`<p class="line-clamp-[10] md:line-clamp-none text-justify">${array[elements.id].description}</p>`;
