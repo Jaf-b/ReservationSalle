@@ -348,6 +348,7 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
 function Sallecards(array,htmlContainer){
 
   let main_card_container =htmlContainer;
+  main_card_container.innerHTML =` `;
   for (let i = 0; i< array.length; i++){
     if(!array[i].reduction){
     main_card_container.innerHTML += `
@@ -379,10 +380,11 @@ function Sallecards(array,htmlContainer){
   }
 }
 function SallecardsWithReduction(array,htmlContainer){
-
   let main_card_container =htmlContainer;
+  main_card_container.innerHTML =` `;
   for (let i = 0; i< array.length; i++){
     if(array[i].reduction){
+    
     main_card_container.innerHTML += `
       <div class="swiper-slide cursor-pointer min-w-[180px] w-[180px] md:min-w-[278px] md:w-[278px]  h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow  gap-5 transition-all hover:scale-90" id="${i}">
         
