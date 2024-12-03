@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { doc, DocumentReference, getDoc, getDocs, getFirestore, setDoc } from "firebase/firestore";
 import { collection } from "firebase/firestore";
-import { getAuth, signInWithPopup, GoogleAuthProvider,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithRedirect, onAuthStateChanged, linkWithRedirect, signInWithEmailLink  } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithRedirect, onAuthStateChanged, linkWithRedirect, signInWithEmailLink, signInWithCredential, sendSignInLinkToEmail  } from 'firebase/auth'
 import Swiper from "swiper";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -232,7 +232,7 @@ const PrecendentSalleReductionCard = document.getElementById("SalleReductionCard
 const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui");
 
 // page de connexion
-  login.addEventListener('click', (e) => {
+  login.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.getElementById('LoginEmail').value;
     const password = document.getElementById('LoginPassword').value;
@@ -240,7 +240,7 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
    signInWithEmailAndPassword(auth,email,password).then((result) => {
     const user = result.user;
     console.log('User signed in:', user);
-    location.reload();
+    
   })
   .catch((error) => {
     console.error('Error signing in with Google:', error.message);
@@ -249,8 +249,17 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
 // connexion avec google
   google_login.addEventListener('click', (e) => {
     signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
+      .then(async (result) => {
+        const uid = result.user.uid;
+        const displayName = result.user.displayName;
+        const email = result.user.email;
+        const phoneNumber=result.user.phoneNumber;
+        const userDocRef = doc(db,'salleUser',user.uid);
+        const userDoc = await getDoc(userDocRef);
+        if(!userDoc.exists()){
+          newUser({displayName,email,uid,phoneNumber})
+        }
+        
         console.log('User signed in:', user);
         location.reload();
       })
@@ -263,14 +272,17 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
     e.preventDefault();
     const email = document.getElementById('Registrationemail').value;
     const password = document.getElementById('Registrationpassword').value;
-    
-    createUserWithEmailAndPassword(auth, email, password)
+    const displayName =document.getElementById('RegistrationName').value;
+    const phoneNumber =document.getElementById('RegistrationNumber').value;
+    createUserWithEmailAndPassword(auth, email,password)
       .then((userCredential) => {
         // Signed up
-        email.reset();
-        password.reset()
-        const user = userCredential.user;
-        console.log('User signed up:', user);
+        const uid = userCredential.user.uid;
+        console.log(uid);
+        
+        newUser({displayName,email,uid,phoneNumber});
+        location.reload();
+        sendSignInLinkToEmail(auth,email);
       })
       .catch((error) => {
         console.error('Error signing up:', error.message);
@@ -279,17 +291,13 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
   // function if login
   onAuthStateChanged(auth, async(user)=>{
     if(user){
-        // ajouter m'utilisateur qui vient de se connecter 
-        const documentRef  = new DocumentReference();
-        const userDocRef = doc(db,"salleUser",user.uid)
-        const userDoc = await getDoc(userDocRef);
-        console.log(userDoc);
-       if(!userDoc.exists()){newUser(user);
-        console.log(userDoc)
-        }else{
-          console.log(userDoc)
-        } 
-      
+      // verifier l'utilisateur
+  const userDocRef = doc(db,'salleUser',user.uid);
+  const userDoc = await getDoc(userDocRef);
+  userDoc.exists()? console.log("exit") : console.log("n'existe pas");
+  
+
+
       Reserver.addEventListener("click", () =>
         {
          const ReservationPopup = document.getElementById("ReservationPopup");
@@ -313,7 +321,7 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
           })
         
       }
-      idClient.innerHTML += `<img src="${user.photoURL}" class="w-[40px] h-[40px] rounded-full">`;
+      idClient.innerHTML += `<img src="${(user.photoURL)?user.photoURL:'/assets/img/Aucune-image-Profil-Homme1.webp'}" class="w-[40px] h-[40px] rounded-full">`;
       idClient.addEventListener("click", ()=>{
         loginPopup.innerHTML = `
         <div class="img">
