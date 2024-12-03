@@ -4,6 +4,8 @@ import { doc, getDocs, getFirestore, onSnapshot, setDoc } from "firebase/firesto
 import { collection } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithRedirect, onAuthStateChanged, linkWithRedirect, signInWithEmailLink  } from 'firebase/auth'
 import firebase from "firebase/compat/app";
+import Swiper from "swiper";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -87,6 +89,7 @@ let array_salle = [
     adresse:"avenue P.E Lumumba",
     price: 500,
     reduction:15,
+    place:500,
     reservation : 1,
     description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. At iste voluptatum sapiente numquam possimus eaque necessitatibus rem similique, a vitae adipisci corporis quaerat natus atque facilis vero minima eveniet? Nostrum molestiae voluptatum nesciunt ratione rem, aspernatur veniam ipsa veritatis ut optio dolore rerum, consequuntur repellat repudiandae, nulla quo accusantium ullam. Cum, corporis illum, mollitia dolores quisquam impedit repellat quis dolore nesciunt reprehenderit iste placeat sed. Voluptates maiores dolorem libero. Vero repudiandae corporis aliquid enim iure suscipit ab fuga minima nam dicta aut, esse nostrum non commodi at dolorem rem cum perspiciatis. Sapiente ad maxime est deleniti maiores error molestias temporibus inventore commodi magni, illo quis aut ipsam. Laboriosam omnis minima, placeat cumque reiciendis odit. Laboriosam aspernatur voluptas maiores expedita amet repellendus debitis accusantium rem quasi. Ullam sunt voluptatum excepturi odit nostrum mollitia voluptatem animi neque nemo harum et, rem velit obcaecati atque enim delectus vero beatae eos optio. Quis excepturi explicabo nisi repellat ullam nostrum commodi assumenda, enim consequuntur dolore aliquid est quos officia, ipsam quas maiores ab voluptate inventore at. Hic, ipsum ut deleniti sunt ipsa mollitia nobis eligendi pariatur inventore autem amet velit ullam vero modi ipsam doloribus odit. Earum sapiente atque minima numquam, expedita aspernatur porro fugit.",
     equipement: [
@@ -106,6 +109,7 @@ let array_salle = [
     name :"salle Hotel Residence",
     adresse:"avenue P.E Lumumba",
     price: 500,
+    place:500,
     reduction:15,
     reservation :2,
     description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. At iste voluptatum sapiente numquam possimus eaque necessitatibus rem similique, a vitae adipisci corporis quaerat natus atque facilis vero minima eveniet? Nostrum molestiae voluptatum nesciunt ratione rem, aspernatur veniam ipsa veritatis ut optio dolore rerum, consequuntur repellat repudiandae, nulla quo accusantium ullam. Cum, corporis illum, mollitia dolores quisquam impedit repellat quis dolore nesciunt reprehenderit iste placeat sed. Voluptates maiores dolorem libero. Vero repudiandae corporis aliquid enim iure suscipit ab fuga minima nam dicta aut, esse nostrum non commodi at dolorem rem cum perspiciatis. Sapiente ad maxime est deleniti maiores error molestias temporibus inventore commodi magni, illo quis aut ipsam. Laboriosam omnis minima, placeat cumque reiciendis odit. Laboriosam aspernatur voluptas maiores expedita amet repellendus debitis accusantium rem quasi. Ullam sunt voluptatum excepturi odit nostrum mollitia voluptatem animi neque nemo harum et, rem velit obcaecati atque enim delectus vero beatae eos optio. Quis excepturi explicabo nisi repellat ullam nostrum commodi assumenda, enim consequuntur dolore aliquid est quos officia, ipsam quas maiores ab voluptate inventore at. Hic, ipsum ut deleniti sunt ipsa mollitia nobis eligendi pariatur inventore autem amet velit ullam vero modi ipsam doloribus odit. Earum sapiente atque minima numquam, expedita aspernatur porro fugit.",
@@ -126,6 +130,7 @@ let array_salle = [
     name :"salle Hotel Residence",
     adresse:"avenue P.E Lumumba",
     price: 500,
+    place:300,
     reduction:15,
     reservation:3,
     description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. At iste voluptatum sapiente numquam possimus eaque necessitatibus rem similique, a vitae adipisci corporis quaerat natus atque facilis vero minima eveniet? Nostrum molestiae voluptatum nesciunt ratione rem, aspernatur veniam ipsa veritatis ut optio dolore rerum, consequuntur repellat repudiandae, nulla quo accusantium ullam. Cum, corporis illum, mollitia dolores quisquam impedit repellat quis dolore nesciunt reprehenderit iste placeat sed. Voluptates maiores dolorem libero. Vero repudiandae corporis aliquid enim iure suscipit ab fuga minima nam dicta aut, esse nostrum non commodi at dolorem rem cum perspiciatis. Sapiente ad maxime est deleniti maiores error molestias temporibus inventore commodi magni, illo quis aut ipsam. Laboriosam omnis minima, placeat cumque reiciendis odit. Laboriosam aspernatur voluptas maiores expedita amet repellendus debitis accusantium rem quasi. Ullam sunt voluptatum excepturi odit nostrum mollitia voluptatem animi neque nemo harum et, rem velit obcaecati atque enim delectus vero beatae eos optio. Quis excepturi explicabo nisi repellat ullam nostrum commodi assumenda, enim consequuntur dolore aliquid est quos officia, ipsam quas maiores ab voluptate inventore at. Hic, ipsum ut deleniti sunt ipsa mollitia nobis eligendi pariatur inventore autem amet velit ullam vero modi ipsam doloribus odit. Earum sapiente atque minima numquam, expedita aspernatur porro fugit.",
@@ -146,6 +151,7 @@ let array_salle = [
     name :"salle Hotel Residence",
     adresse:"avenue P.E Lumumba",
     price: 500,
+    place:300,
     reduction:false,
     reservation:4,
     description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. At iste voluptatum sapiente numquam possimus eaque necessitatibus rem similique, a vitae adipisci corporis quaerat natus atque facilis vero minima eveniet? Nostrum molestiae voluptatum nesciunt ratione rem, aspernatur veniam ipsa veritatis ut optio dolore rerum, consequuntur repellat repudiandae, nulla quo accusantium ullam. Cum, corporis illum, mollitia dolores quisquam impedit repellat quis dolore nesciunt reprehenderit iste placeat sed. Voluptates maiores dolorem libero. Vero repudiandae corporis aliquid enim iure suscipit ab fuga minima nam dicta aut, esse nostrum non commodi at dolorem rem cum perspiciatis. Sapiente ad maxime est deleniti maiores error molestias temporibus inventore commodi magni, illo quis aut ipsam. Laboriosam omnis minima, placeat cumque reiciendis odit. Laboriosam aspernatur voluptas maiores expedita amet repellendus debitis accusantium rem quasi. Ullam sunt voluptatum excepturi odit nostrum mollitia voluptatem animi neque nemo harum et, rem velit obcaecati atque enim delectus vero beatae eos optio. Quis excepturi explicabo nisi repellat ullam nostrum commodi assumenda, enim consequuntur dolore aliquid est quos officia, ipsam quas maiores ab voluptate inventore at. Hic, ipsum ut deleniti sunt ipsa mollitia nobis eligendi pariatur inventore autem amet velit ullam vero modi ipsam doloribus odit. Earum sapiente atque minima numquam, expedita aspernatur porro fugit.",
@@ -166,6 +172,7 @@ let array_salle = [
     name :"salle Hotel Residence",
     adresse:"avenue P.E Lumumba",
     price: 500,
+    place:700,
     reduction:false,
     reservation :5,
     description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. At iste voluptatum sapiente numquam possimus eaque necessitatibus rem similique, a vitae adipisci corporis quaerat natus atque facilis vero minima eveniet? Nostrum molestiae voluptatum nesciunt ratione rem, aspernatur veniam ipsa veritatis ut optio dolore rerum, consequuntur repellat repudiandae, nulla quo accusantium ullam. Cum, corporis illum, mollitia dolores quisquam impedit repellat quis dolore nesciunt reprehenderit iste placeat sed. Voluptates maiores dolorem libero. Vero repudiandae corporis aliquid enim iure suscipit ab fuga minima nam dicta aut, esse nostrum non commodi at dolorem rem cum perspiciatis. Sapiente ad maxime est deleniti maiores error molestias temporibus inventore commodi magni, illo quis aut ipsam. Laboriosam omnis minima, placeat cumque reiciendis odit. Laboriosam aspernatur voluptas maiores expedita amet repellendus debitis accusantium rem quasi. Ullam sunt voluptatum excepturi odit nostrum mollitia voluptatem animi neque nemo harum et, rem velit obcaecati atque enim delectus vero beatae eos optio. Quis excepturi explicabo nisi repellat ullam nostrum commodi assumenda, enim consequuntur dolore aliquid est quos officia, ipsam quas maiores ab voluptate inventore at. Hic, ipsum ut deleniti sunt ipsa mollitia nobis eligendi pariatur inventore autem amet velit ullam vero modi ipsam doloribus odit. Earum sapiente atque minima numquam, expedita aspernatur porro fugit.",
@@ -186,6 +193,7 @@ let array_salle = [
     name :"salle Hotel Residence",
     adresse:"avenue P.E Lumumba",
     price: 500,
+    place:350,
     reduction:false,
     reservation:6,
     description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. At iste voluptatum sapiente numquam possimus eaque necessitatibus rem similique, a vitae adipisci corporis quaerat natus atque facilis vero minima eveniet? Nostrum molestiae voluptatum nesciunt ratione rem, aspernatur veniam ipsa veritatis ut optio dolore rerum, consequuntur repellat repudiandae, nulla quo accusantium ullam. Cum, corporis illum, mollitia dolores quisquam impedit repellat quis dolore nesciunt reprehenderit iste placeat sed. Voluptates maiores dolorem libero. Vero repudiandae corporis aliquid enim iure suscipit ab fuga minima nam dicta aut, esse nostrum non commodi at dolorem rem cum perspiciatis. Sapiente ad maxime est deleniti maiores error molestias temporibus inventore commodi magni, illo quis aut ipsam. Laboriosam omnis minima, placeat cumque reiciendis odit. Laboriosam aspernatur voluptas maiores expedita amet repellendus debitis accusantium rem quasi. Ullam sunt voluptatum excepturi odit nostrum mollitia voluptatem animi neque nemo harum et, rem velit obcaecati atque enim delectus vero beatae eos optio. Quis excepturi explicabo nisi repellat ullam nostrum commodi assumenda, enim consequuntur dolore aliquid est quos officia, ipsam quas maiores ab voluptate inventore at. Hic, ipsum ut deleniti sunt ipsa mollitia nobis eligendi pariatur inventore autem amet velit ullam vero modi ipsam doloribus odit. Earum sapiente atque minima numquam, expedita aspernatur porro fugit.",
@@ -324,7 +332,7 @@ function Sallecards(array,htmlContainer){
   for (let i = 0; i< array.length; i++){
     if(!array[i].reduction){
     main_card_container.innerHTML += `
-      <div class="cursor-pointer min-w-[180px] w-[180px] md:min-w-[278px] md:w-[278px] h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow  gap-5 transition-all hover:scale-90" id="${i}">
+      <div class="swiper-slide cursor-pointer min-w-[180px] w-[180px] md:min-w-[278px] md:w-[278px] h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow  gap-5 transition-all hover:scale-90" id="${i}">
         
         <div id="img">
             <img class="md:w-[278px] md:h-[150px] rounded-xl object-cover flex flex-col gap-3" src="${array[i].image}" alt="">
@@ -357,7 +365,7 @@ function SallecardsWithReduction(array,htmlContainer){
   for (let i = 0; i< array.length; i++){
     if(array[i].reduction){
     main_card_container.innerHTML += `
-      <div class="cursor-pointer min-w-[180px] w-[180px] md:min-w-[278px] md:w-[278px]  h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow  gap-5 transition-all hover:scale-90" id="${i}">
+      <div class="swiper-slide cursor-pointer min-w-[180px] w-[180px] md:min-w-[278px] md:w-[278px]  h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow  gap-5 transition-all hover:scale-90" id="${i}">
         
         <div id="img">
             <img class="md:w-[278px] md:h-[150px] rounded-xl object-cover flex flex-col gap-3" src="${array[i].image}" alt="">
@@ -600,7 +608,7 @@ function TeamCard(array, htmlContainer){
   let mainContainer = htmlContainer;
   for(let i = 0; i < array.length; i++){
     mainContainer.innerHTML += `
-    <div class="flex flex-col justify-center min-w-[170px] w-[170px] md:w-[250px] md:min-w-[250px] h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow gap-5 transition-all hover:scale-90" id"teamCard">
+    <div class="swiper-slide flex flex-col justify-center min-w-[170px] w-[170px] md:w-[250px] md:min-w-[250px] h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow gap-5 transition-all hover:scale-90" id"teamCard">
         <div id="img" class="flex justify-center ">
             <img class="w-[100px] h-[100px] md:w-[150px] md:h-[150px] rounded-full object-cover flex flex-col gap-3" src="${array[i].img}" alt="">
         </div>
@@ -847,7 +855,7 @@ PrecendentSalleCard.addEventListener("click",()=>{
   const ReservationDate = document.getElementById("date");
   const Nbreplace = document.getElementById("place");
   if(Emplacement && ReservationDate && Nbreplace){
-    let SalleArrayFilter = array_salle.filter((elmt)=> (elmt.adresse.toLocaleLowerCase().includes(Emplacement.value.toLocaleLowerCase())));
+    let SalleArrayFilter = array_salle.filter((elmt)=> (elmt.adresse.toLocaleLowerCase().includes(Emplacement.value.toLocaleLowerCase()) && elmt.place == Nbreplace.value ));
     let ReservationArrayFilter = reservation.filter((elmt) => (elmt.status && elmt.date == ReservationDate));
     console.log(SalleArrayFilter);
    
@@ -886,3 +894,69 @@ PrecendentSalleCard.addEventListener("click",()=>{
     GetDetailsCard(SalleArrayFilter,Recherche)
   }
  })
+ const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+  width:250,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+const swiper2 = new Swiper('.swiper2', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+  width:250,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+const swiper3 = new Swiper('.swiper3', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+  width:250,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});

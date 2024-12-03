@@ -4,13 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="/dist/output.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/node_modules/swiper/swiper-bundle.min.css">
+    <style>
+  
+    </style>
 </head>
 <body class="lg:max-w-5xl sm:max-w-xl md:max-w-3xl m-auto flex justify-center items-center ">
-     
-    <script src="bundle.js">
-        
-    </script>
+    <link rel="stylesheet" href="/node_modules/swiper/swiper-bundle.min.css">
+    <div class="swiper w-full">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper w-full flex gap-5">
+          <!-- Slides -->
+          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
+          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
+          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
+          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
+          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
+           <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
+          ...
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination hidden lg:flex"></div>
+      
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      
+        <!-- If we need scrollbar -->
+        <div class="swiper-scrollbar hidden"></div>
+      </div>
+ <script type="module" >
+  import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+
+  const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+</script>
 </body>
 </html>
