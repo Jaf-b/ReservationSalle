@@ -6,7 +6,6 @@
     <title>MOMOresevation</title>
     <link rel="stylesheet" href="/dist/output.css">
     <link rel="stylesheet" href="/src/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="lg:max-w-5xl max-w-xl md:max-w-3xl m-auto ">
     <header class="flex flex-wrap w-[100%] justify-between items-center px-3 py-3 border-b-2">
@@ -214,20 +213,28 @@
             <button class="p-3 w-auto h-auto bg-blue-500 rounded font-semibold text-white" id="googleSignIn">se connecter avec Google</button>
         </div>
     </section>
-    <section id="inscription" class="hidden justify-center items-center">
-        <div class="w-80 h-[500px] p-4  flex flex-col gap-4">
+    <section id="inscription" class="w-full hidden justify-center items-center">
+        <div class="w-full md:w-[80%] h-[500px] p-4  flex flex-col gap-4">
             <h1 class="text-3xl text-center font-semibold">Inscription</h1>
-            <form class="flex flex-col p-3  gap-5">
-                <input type="email" required placeholder="  Nom" class="p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="RegistrationName">
-                <input type="email" required placeholder=" PostNom" class="p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="RegistrationSecondName">
-                <input type="number" required placeholder=" Telephone" class="p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="RegistrationNumber">
-                <input type="email" required placeholder="  E-mail" class="p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="Registrationemail">
-                <input type="password" required placeholder="  Password" class="p-3 h-[40px] rounded  outline outline-[1.75px] outline-blue-500  bg-transparent text-left" id="Registrationpassword">
-                <button type="submit" class="p-3 w-auto h-auto bg-blue-500  rounded font-semibold text-white" id="signup">S'inscrire</button>
+            <form class="w-full flex flex-col p-3  gap-5 justify-center items-center">
+              <div class="w-full  flex justify-center items-center gap-3 md:w-[55%] ">
+                <input type="email" required placeholder="  Nom" class="flex-1 w-[20%]  p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="RegistrationName">
+                <input type="email" required placeholder=" PostNom" class="flex-1 w-[20%]  p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="RegistrationSecondName">
+              </div>
+             <div class="w-full flex justify-center items-center gap-3 md:w-[55%] ">
+                <input type="number" required placeholder=" Telephone" class="flex-1 w-[20%] md:w-[40%] p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="RegistrationNumber">
+                <input type="email" required placeholder="  E-mail" class="flex-1 w-[20%] md:w-[40%] p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="Registrationemail">
+             </div>
+                <div class="flex justify-center items-center w-full ">
+                    <input type="password" required placeholder="Password" class="w-full md:w-[55%]  p-3  h-[40px] rounded  outline outline-[1.75px] outline-blue-500  bg-transparent text-left" id="Registrationpassword">
+                </div>
+                <button type="submit" class="p-3  h-auto w-full bg-blue-500  rounded font-semibold text-white md:w-[55%]" id="signup">S'inscrire</button>
                 <span class="text-sm font-semibold text-gray-400">vous avez un compte ? <a>se connecter</a></span>
             </form>
             <div class="flex text-center justify-center items-center text-lg font-semibold text-gray-400">--------------- ou --------------</div>
-            <button class="p-3 w-auto h-auto bg-blue-500 rounded font-semibold text-white" id="googleSignIn">se connecter avec Google</button>
+            <div class="w-full flex justify-center items-center">
+                <button class="p-3 w-full h-auto bg-blue-500 rounded font-semibold text-white md:w-[55%]" id="googleSignIn">se connecter avec Google</button>
+            </div>
         </div>
     </section>
     <section id="aboutUs" class="swiper3 max-w-full w-full p-3 m-auto relative flex flex-col gap-5 mt-10 overflow-hidden">
