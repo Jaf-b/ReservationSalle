@@ -84,7 +84,7 @@ let TeamInfo =[
 let array_salle = [
 
   {
-    image:"/assets/img/lieu-reception-mariage3-ostap-davydiak-stockadobe-com.jpg",
+    image:"https://firebasestorage.googleapis.com/v0/b/reservationsalle-e1692.appspot.com/o/image%20belvedere%201.JPG?alt=media&token=71c73de0-1817-4c8c-945d-911e9005bec1",
     name :"salle Hotel Residence",
     adresse:"avenue P.E Lumumba",
     price: 500,
@@ -105,8 +105,8 @@ let array_salle = [
     ]
   },
   {
-    image:"/assets/img/lieu-reception-mariage3-ostap-davydiak-stockadobe-com.jpg",
-    name :"salle Hotel Residence",
+    image:"assets/img/lieu-reception-mariage3-ostap-davydiak-stockadobe-com.jpg",
+    name :"salle Hotel Belvedere",
     adresse:"avenue P.E Lumumba",
     price: 500,
     place:500,
@@ -126,8 +126,8 @@ let array_salle = [
     ]
   },
   {
-    image:"/assets/img/lieu-reception-mariage3-ostap-davydiak-stockadobe-com.jpg",
-    name :"salle Hotel Residence",
+    image:"assets/img/lieu-reception-mariage3-ostap-davydiak-stockadobe-com.jpg",
+    name :"salle Hotel Elizabeth",
     adresse:"avenue P.E Lumumba",
     price: 500,
     place:300,
@@ -147,8 +147,8 @@ let array_salle = [
     ]
   },
   {
-    image:"/assets/img/lieu-reception-mariage3-ostap-davydiak-stockadobe-com.jpg",
-    name :"salle Hotel Residence",
+    image:"https://firebasestorage.googleapis.com/v0/b/reservationsalle-e1692.appspot.com/o/image%20salle%20rafiki.JPG?alt=media&token=d0a29cd9-74b0-406d-a047-b104bb72b534",
+    name :"salle de Fête Kaningu",
     adresse:"avenue P.E Lumumba",
     price: 500,
     place:300,
@@ -168,8 +168,8 @@ let array_salle = [
     ]
   },
   {
-    image:"/assets/img/lieu-reception-mariage3-ostap-davydiak-stockadobe-com.jpg",
-    name :"salle Hotel Residence",
+    image:"https://firebasestorage.googleapis.com/v0/b/reservationsalle-e1692.appspot.com/o/image%20elisabeth%202.JPG?alt=media&token=8012e83c-4671-4282-aebf-eeff4f39eefa",
+    name :"salle Hotel Panorama",
     adresse:"avenue P.E Lumumba",
     price: 500,
     place:700,
@@ -189,8 +189,8 @@ let array_salle = [
     ]
   },
   {
-    image:"/assets/img/lieu-reception-mariage3-ostap-davydiak-stockadobe-com.jpg",
-    name :"salle Hotel Residence",
+    image:"https://firebasestorage.googleapis.com/v0/b/reservationsalle-e1692.appspot.com/o/image%20chapiteau%202.JPG?alt=media&token=1b466940-bd9f-47fd-9a88-40e48377c0a9",
+    name :"salle Hotel Rivieras",
     adresse:"avenue P.E Lumumba",
     price: 500,
     place:350,
