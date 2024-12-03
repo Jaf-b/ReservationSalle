@@ -248,8 +248,8 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
   });
 // connexion avec google
   google_login.addEventListener('click', (e) => {
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
+    signInWithPopup(auth, provider).then(async (result) => {
+      location.reload();
         const uid = result.user.uid;
         const displayName = result.user.displayName;
         const email = result.user.email;
@@ -260,8 +260,7 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
           newUser({displayName,email,uid,phoneNumber})
         }
         
-        console.log('User signed in:', user);
-        location.reload();
+        
       })
       .catch((error) => {
         console.error('Error signing in with Google:', error.message);
@@ -291,13 +290,7 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
   // function if login
   onAuthStateChanged(auth, async(user)=>{
     if(user){
-      // verifier l'utilisateur
-  const userDocRef = doc(db,'salleUser',user.uid);
-  const userDoc = await getDoc(userDocRef);
-  userDoc.exists()? console.log("exit") : console.log("n'existe pas");
-  
-
-
+      // verifier l'utilisateur;
       Reserver.addEventListener("click", () =>
         {
          const ReservationPopup = document.getElementById("ReservationPopup");
@@ -328,7 +321,6 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
                       <img src="${user.photoURL}" class="w-[80px] h-[80px] rounded-full">
                   </div>
                   <div class="name">
-                      <h1 class="text-2xl text-center font-semibold">${user.displayName}</h1>
                       <span class="text-sm text-center text-gray-400 font-semibold">${user.email}</span>
                   </div>
         </div>
