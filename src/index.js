@@ -490,14 +490,7 @@ function TeamCard(array, htmlContainer){
     }
   }
 }
-if(SalleCardsReduction){
- const arraychild = Array.from(SalleCardsReduction.children);
- arraychild.forEach((elmt) =>{
-  elmt.addEventListener("click",()=>{
-    window.location.href = `/src/details.html?id=${elmt.id}`;
-  })
- })
-}
+
 SallecardsWithReduction(array_salle,SalleCardsReduction)
 Sallecards(array_salle,salleCardContainer);
 // show details of cards
@@ -518,6 +511,16 @@ if(btnSignUp){
   btnSignUp.addEventListener("click", () =>{
     window.location.href = "/src/registration.html";
   });
+}
+if(SalleCardsReduction){
+ const ArrayChild=Array.from(SalleCardsReduction.children)
+ console.log(ArrayChild);
+ ArrayChild.forEach((e)=>{
+  e.addEventListener("click",()=>{
+    window.location.href = `/src/details.html?id=${e.id}`
+    
+  })
+ }) 
 }
 
 if(salleCardContainer){
@@ -552,7 +555,6 @@ SuivantTeamCard.addEventListener("click",()=>{
  function changeSlide(direction){
   const ArrayHtmlElement = document.getElementById('containerUS');
   const slides = Array.from(ArrayHtmlElement.children);
-  console.log(slides);
   currentSlide += direction;
   
   if(currentSlide < 0){
@@ -590,7 +592,6 @@ PrecendentSalleCard.addEventListener("click",()=>{
   function changeSlide(direction){
    const ArrayHtmlElement = document.getElementById('SalleCards');
    const slides = Array.from(ArrayHtmlElement.children);
-   console.log(slides);
    currentSlide += direction;
    
    if(currentSlide < 0){
