@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoMoReservation|Details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/dist/output.css">
+</head>
+<body class="lg:max-w-4xl max-w-xl md:max-w-3xl m-auto ">
+    <header class="flex flex-wrap w-[100%] justify-between items-center px-3 py-3 border-b-2">
+        <div id="logo">
+            <h1 ><a class="text-2xl font-bold" href="">MoMo Reservation</a></h1>
+        </div>
+        <nav>
+            <ul class="flex gap-5 font-semibold">
+                <li  id="AddSalle"><a href="/src/Add.html" class="hidden lg:flex cursor-pointer transition-all font-semibold lg:hover:text-orange-300">Ajouter votre établissements</a></li>
+            </ul>
+        </nav>
+        <div id="idLogin">
+            <div id="idClient" class="flex cursor-pointer gap-3 justify-center items-center">
+            </div>
+            <div id="connexion" class="flex gap-3">
+                <button class="w-fit flex px-2 py-2 bg-blue-500 text-white lg:text-black lg:bg-white transition-all  rounded font-semibold lg:border lg:border-black lg:hover:bg-orange-400 hover:text-white" id="login">connexion</button>
+                <button class="hidden w-fit  px-2 py-2  bg-blue-500 text-white rounded font-semibold" id="signUp">Inscription</button>
+                
+            </div>
+        </div>
+    </header>
+    <section id="searchBar" class="mt-10 lg:mb-0 mb-10 flex justify-center items-center">
+        <!---------------------------search bar--------------------------------->
+        <div id="searchbar" class="flex flex-col w-11/12 gap-3 px-5 py-10 border shadow rounded">
+               <input type="text"  required placeholder="Emplacement" id="Emplacementhome" class="p-3 flex-1 w-[100%] h-[45px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left font-semibold">
+           <input type="date" required placeholder="Date de reservation" id="datehome" class=" p-3 flex-1  w-[100%] h-[45px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left font-semibold">
+           <input type="number" required placeholder="Nombre de Place" id="placehome" class="flex-1 p-3  w-[100%] h-[45px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left font-semibold">
+           <a href="/src/recherche.html">
+           <button class=" flex flex-1 p-3 w-[100%] h-[45px]  bg-blue-500 rounded font-semibold text-white items-center justify-center" id="searchs">Rechercher</button></a>
+
+       </div>
+<!---------------------------end search bar--------------------------------->
+   </section>
+  
+    <section id="Details" class="w-full flex flex-col justify-center items-center mt-0  lg:mt-10 ">
+        <div class="w-[100%] h-[150px] lg:h-[120px]  hidden lg:flex flex-col gap-5 ">
+            <ul class="flex gap-2 font-medium h-[30%] ">
+                <li class="w-auto h-[100%] p-4 font-medium"><a href="/index.html">Acceuil</a></li>
+                <span class="w-auto h-[100%] p-4 font-medium"> &#10095;</span>
+                <li class="w-auto h-[100%] p-4 font-medium">Bukavu</li>
+            </ul>
+            <ul class="flex justify-between gap-3 h-[50%] font-medium">
+
+                    <li class="w-auto h-[100%] p-3 relative flex justify-center items-center  cursor-pointer">Vue d'ensemble</li>
+                    <li class="w-auto h-[100%] p-3 relative flex justify-center items-center cursor-pointer"><a href="#equipement">Equipement</a></li>
+                    <li class="w-auto  h-[100%]   p-3 relative flex justify-center items-center cursor-pointer"><a href="#Info">Info et tarifs</a></li>
+                    <li class="w-auto h-[100%] p-3 relative flex justify-center items-center text-center cursor-pointer"><a href="#commentaire">commentaires clients (1406)</a></li>
+            </ul>
+            <hr class="shadow-md">
+        </div>
+        <div id="container" class="flex flex-col w-[100%] ">
+            <div id="titleContainer" class="w-[100%]   flex gap-3 justify-between p-3 rounded border-b shadow md:shadow-none md:border-none ">
+                 <div id="title" class="flex flex-col justify-center">
+                   
+                </div>
+                <div id="option" class="flex justify-center items-center gap-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hidden flex-1 md:flex lg:flex w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                    </svg>
+                    <button class="flex-1 relative p-3 w-auto h-[50px] bg-blue-500 rounded font-semibold text-white" id="Reserver">Réserver</button>
+                </div>
+                
+          </div>
+         
+        <!----- picture--------------------------------------------------------------------------->   
+        <div class="w-full" id="picture">
+           <div id="carouselContainer" class="w-full p-3">
+            <div class="" id="Preview">
+                
+            </div>
+           </div>
+        </div> 
+        <!----- End picture--------------------------------------------------------------------------->
+            <div class="w-full" id="descriptionAndReservation">
+                <div>
+                    <div class="hidden absolute left-16 top-[450px] cursor-pointer" id="pre">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                          </svg>
+                    </div>
+                    <div class="hidden absolute right-[140px] top-[450px] cursor-pointer" id="sui">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                          </svg>
+                    </div>
+                </div>
+        <!----- Description --------------------------------------------------------------------------->
+         <div class="flex w-full p-5">
+            <div id="describe" class="flex items-center justify-center w-full">
+               
+            </div>
+         </div>
+        <!-----end Description -------------------------------------------------------------------->
+         <!-----EquipementCard------------------------------------------------------------------------>
+        <div id="equipement" class="mt-[50px] justify-center items-center flex flex-col gap-5">
+            <h1 class="text-2xl font-semibold">Equipement</h1>
+            <div class="flex gap-5 flex-col md:flex-row" id="cardContainer">
+            </div>
+         </div>
+         <!-----End Equipement ------------------------------------------------------------------->
+         <!-----ReservationCard------------------------------------------------------------------------>
+         <div id="reservationCard" class="flex flex-col gap-3 justify-center items-center mt-[50px]">
+            <div class="" id="reservation">
+                <h1 class="text-2xl font-semibold" id="Info">Info et Tarifs</h1>
+            </div>
+            <div id="ListOfCard" class="flex flex-col md:flex-row gap-3">
+              
+            </div>
+            
+            
+         </div>
+         <!-----End ReservationCard------------------------------------------------------------------->
+    
+        </div>
+                     <!-----commentaire Cards------------------------------------------------------------------->
+            <div id="commentaire" class="mt-[50px] flex flex-col gap-5 ">
+                <div id="Title" class="flex justify-center items-center">
+                    <h1 class="text-2xl font-semibold" id="commentaire">Commentaires</h1>
+                </div>
+                <div id="Commentairebody" class="flex justify-center items-center gap-3">
+    
+                </div>
+         
+            </div>
+                          <!-----End Commentaire cards------------------------------------------------------------------->
+        </div>
+    </section>
+    <div class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="ReservationPopup">
+        <!--
+          Background backdrop, show/hide based on modal state.
+      
+          Entering: "ease-out duration-300"
+            From: "opacity-0"
+            To: "opacity-100"
+          Leaving: "ease-in duration-200"
+            From: "opacity-100"
+            To: "opacity-0"
+        -->
+        <div class=" fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
+      
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <!--
+              Modal panel, show/hide based on modal state.
+      
+              Entering: "ease-out duration-300"
+                From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                To: "opacity-100 translate-y-0 sm:scale-100"
+              Leaving: "ease-in duration-200"
+                From: "opacity-100 translate-y-0 sm:scale-100"
+                To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            -->
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+              <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                  <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
+                    <svg class="size-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                    </svg>
+                  </div>
+                  <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                    <h3 class="text-base font-semibold text-gray-900" id="modal-title">Reservation</h3>
+                    <div class="mt-2">
+                      <p class="text-sm text-gray-500">Cette plateforme n'implemente pas le paiement pour les salles mais votre demande de reservation seras envoyé à l'équipe du gestionnaire de la salle de fêtes mais nous continuons de travailler là dessus pour une bonne experience merci pour votre comprehension</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <button type="button" class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto">Envoyer</button>
+                <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" id="cancel">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="/dist/bundle.js"></script>
+    <script src="./details.js"></script>
+</body>
+</html>

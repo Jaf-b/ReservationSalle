@@ -32,7 +32,6 @@ const signup = document.getElementById('signup');
 const home =document.getElementById('home'); 
 const main =document.getElementById('main'); 
 const Recherche =document.getElementById('Recherche'); 
-const Details =document.getElementById('Details'); 
 const loginBtns = document.getElementById("connexion")
 const connexion =document.getElementById('Seconnecter'); 
 const inscription =document.getElementById('inscription'); 
@@ -209,6 +208,8 @@ let array_salle = [
     ]
   },
 ];
+const arrayStringify = JSON.stringify(array_salle);
+localStorage.setItem("salleList",arrayStringify)
 
 let arrayReductionCard = [
   {
@@ -232,24 +233,27 @@ const PrecendentSalleReductionCard = document.getElementById("SalleReductionCard
 const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui");
 
 // page de connexion
-  login.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('LoginEmail').value;
-    const password = document.getElementById('LoginPassword').value;
-  
-   signInWithEmailAndPassword(auth,email,password).then((result) => {
-    const user = result.user;
-    console.log('User signed in:', user);
+  if(login){
+    login.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('LoginEmail').value;
+      const password = document.getElementById('LoginPassword').value;
     
-  })
-  .catch((error) => {
-    console.error('Error signing in with Google:', error.message);
-  });
-  });
-// connexion avec google
+     signInWithEmailAndPassword(auth,email,password).then((result) => {
+      const user = result.user;
+      console.log('User signed in:', user);
+      
+    })
+    .catch((error) => {
+      console.error('Error signing in with Google:', error.message);
+    });
+    });
+  }
+  if(google_login){
+      // connexion avec google
   google_login.addEventListener('click', (e) => {
     signInWithPopup(auth, provider).then(async (result) => {
-      location.reload();
+      window.location.href = "/index.html";
         const uid = result.user.uid;
         const displayName = result.user.displayName;
         const email = result.user.email;
@@ -266,7 +270,9 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
         console.error('Error signing in with Google:', error.message);
       });
   });
-// inscription 
+  }
+  if(signup){
+    // inscription 
   signup.addEventListener('click', (e) => {
     e.preventDefault();
     const email = document.getElementById('Registrationemail').value;
@@ -277,27 +283,29 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
       .then((userCredential) => {
         // Signed up
         const uid = userCredential.user.uid;
-        console.log(uid);
-        
         newUser({displayName,email,uid,phoneNumber});
-        location.reload();
+        window.location.href = "/index.html";
         sendSignInLinkToEmail(auth,email);
       })
       .catch((error) => {
         console.error('Error signing up:', error.message);
       });
   });
+  }
+
   // function if login
   onAuthStateChanged(auth, async(user)=>{
     if(user){
       // verifier l'utilisateur;
-      Reserver.addEventListener("click", () =>
-        {
-         const ReservationPopup = document.getElementById("ReservationPopup");
-          ReservationPopup.classList.remove("hidden");
-          ReservationPopup.classList.add("flex");
-        } 
-      );
+      if(Reserver){
+        Reserver.addEventListener("click", () =>
+          {
+           const ReservationPopup = document.getElementById("ReservationPopup");
+            ReservationPopup.classList.remove("hidden");
+            ReservationPopup.classList.add("flex");
+          } 
+        );
+      }
       loginBtns.classList.remove('flex');
       loginBtns.classList.add('hidden');
       if(SignOut){
@@ -318,7 +326,7 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
       idClient.addEventListener("click", ()=>{
         loginPopup.innerHTML = `
         <div class="img">
-                      <img src="${user.photoURL}" class="w-[80px] h-[80px] rounded-full">
+                      <img src="${(user.photoURL)?user.photoURL:'/assets/img/Aucune-image-Profil-Homme1.webp'}" class="w-[80px] h-[80px] rounded-full">
                   </div>
                   <div class="name">
                       <span class="text-sm text-center text-gray-400 font-semibold">${user.email}</span>
@@ -331,11 +339,13 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
       });
     }
     else{
-      Reserver.addEventListener("click", () =>
-        {
-         loginFunction()
-        } 
-      );
+      if(Reserver){
+        Reserver.addEventListener("click", () =>
+          {
+           window.location.href="/src/login.html";
+          } 
+        );
+      }
     }
   })
 //redirection
@@ -348,6 +358,7 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
 function Sallecards(array,htmlContainer){
 
   let main_card_container =htmlContainer;
+ if(main_card_container){
   main_card_container.innerHTML =` `;
   for (let i = 0; i< array.length; i++){
     if(!array[i].reduction){
@@ -378,9 +389,12 @@ function Sallecards(array,htmlContainer){
     `
   }
   }
+ }
 }
 function SallecardsWithReduction(array,htmlContainer){
   let main_card_container =htmlContainer;
+  if(main_card_container){
+     
   main_card_container.innerHTML =` `;
   for (let i = 0; i< array.length; i++){
     if(array[i].reduction){
@@ -412,6 +426,7 @@ function SallecardsWithReduction(array,htmlContainer){
     `
   }
   }
+  }
 }
 function loginFunction(){
   search.classList.remove('flex');
@@ -439,266 +454,47 @@ function loginFunction(){
 }
 function ReductionCard(array, htmlContainer){
   let mainContainer = htmlContainer;
-  for(let i = 0; i < array.length; i++){
-    mainContainer.innerHTML += `
-    <!-- card -->
-    <div class="w-full lg:w-10/12 h-[180px] md:h-[220px] bg-blue-500 flex justify-between items-center p-5 rounded-3xl border shadow">
-            <div class="">
-                <img src="/assets/img/55b8d8b9188fd6fbe921c59226474a0c-removebg.png" class="hidden md:flex w-[200px]">
-            </div>
-            <div class="">
-                <h1 class=" text-xl text-center text-white font-bold">${array[i].title}</h1>
-            <h2 class="line-clamp-1 text-sm text-gray-500 text-center font-semibold">${array[i].describe}</h2> 
-            </div>   
-        
-        </div>
-    `
-  }
-}
-function EquipementCard(array,htmlContainer){
-let mainContainer = htmlContainer;
-mainContainer.innerHTML = ` `;
-  for(let i = 0; i < array.length; i++){
-    mainContainer.innerHTML += `
-              <!-- card -->
-    <div class="w-[310.5px]  bg-white md:w-[350.5px] h-[182px] mt-5 flex  gap-5 items-center border shadow rounded-2xl p-4 ">
-        <!--card header-->
-        <!-- card body -->
-         <div class=" w-[100%] h-[100%] flex flex-col items-center justify-center">
-            <h1 class="text-base font-semibold">${array[i].title}</h1>
-            <p class="text-sm text-center">${array[i].description}
-            </p>
-         </div>
-     </div>
-  `
-  }
-}
-function ReservationCard(objet,mainCardContainer){
- let mainContainer = mainCardContainer;  
- let listArray = [];
-  objet.equipement.forEach((data)=>{
-    listArray.push(`<li class="flex font-semibold">
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-               <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-             </svg>
-      ${data.title}</li>`)
-  });
-  if(objet.reduction){
-    mainContainer.innerHTML =`
-    <div class="flex flex-col w-[300px] h-[300px] rounded-2xl p-4 border shadow  gap-3 transition-all hover:scale-90" id="">
-    <div id="head" class="flex justify-between">
-        <h1 class="text-2xl font-bold">Clients</h1>
-        <div class="w-[80px] text-sm text-center p-1 max-w-[150px] border rounded-full font-semibold bg-blue-500 text-white shadow">Special</div>
-    </div>
-    <div id="priceAndDescribe">
-        <h1 class="text-3xl font-bold"><span class="line-through font-light">${objet.price}</span> ${(objet.price - ((objet.price * objet.reduction)/100) )} $</h1>
-        <p class="text-sm text-gray-500 font-semibold ">Vous beneficiarais de quelques avantages liées à votre commande</p>
-    </div>
-    <div id="Avantage">
-        <ul>
-        ${listArray}
-        </ul>
-    </div>
-    <div id="BtnReserver">
-        <button class="p-2 w-full  h-auto bg-blue-500 rounded font-semibold text-white">Reserver</button>
-    </div>
-  </div>
-  <div class="flex flex-col w-[300px] h-[300px] rounded-2xl p-4 border shadow  gap-3 transition-all hover:scale-90" id="">
-    <div id="head" class="flex justify-between">
-        <h1 class="text-2xl font-bold">Clients</h1>
-        <div class="w-[80px] text-sm text-center p-1 max-w-[150px] border rounded-full font-semibold bg-blue-500 text-white shadow">Special</div>
-    </div>
-    <div id="priceAndDescribe">
-        <h1 class="text-3xl font-bold"><span class="line-through font-light">${(objet.price)*2}</span> ${((objet.price)*2) - (((objet.price *2) * objet.reduction)/100) } $<span class="text-xl font-semibold">/2jours</span></h1>
-        <p class="text-sm text-gray-500 font-semibold ">Vous beneficiarais de quelques avantages liées à votre commande</p>
-    </div>
-    <div id="Avantage">
-        <ul>
-        ${listArray}
-        </ul>
-    </div>
-    <div id="BtnReserver">
-        <button class="p-2 w-full  h-auto bg-blue-500 rounded font-semibold text-white">Reserver</button>
-    </div>
-  </div>
-    `
-  }
-  else{
-    mainContainer.innerHTML =`
-    <div class="flex flex-col mt-11 w-[300px] h-[300px] rounded-2xl p-4 border shadow  gap-3 transition-all hover:scale-90" id="">
-    <div id="head" class="flex justify-between">
-        <h1 class="text-2xl font-bold">Clients</h1>
-        <div class="w-[80px] text-sm text-center p-1 max-w-[150px] border rounded-full font-semibold bg-blue-500 text-white shadow">Special</div>
-    </div>
-    <div id="priceAndDescribe">
-        <h1 class="text-3xl font-bold">${objet.price}$</h1>
-        <p class="text-sm text-gray-500 font-semibold ">Vous beneficiarais de quelques avantages liées à votre commande</p>
-    </div>
-    <div id="Avantage">
-        <ul>
-        ${listArray}
-        </ul>
-    </div>
-    <div id="BtnReserver">
-        <button class="p-2 w-full  h-auto bg-blue-500 rounded font-semibold text-white">Reserver</button>
-    </div>
-  </div>
-  <div class="flex flex-col mt-11 w-[300px] h-[300px] rounded-2xl p-4 border shadow  gap-3 transition-all hover:scale-90" id="">
-  <div id="head" class="flex justify-between">
-      <h1 class="text-2xl font-bold">Clients</h1>
-      <div class="w-[80px] text-sm text-center p-1 max-w-[150px] border rounded-full font-semibold bg-blue-500 text-white shadow">Special</div>
-  </div>
-  <div id="priceAndDescribe">
-      <h1 class="text-3xl font-bold">${objet.price*2}$</h1>
-      <p class="text-sm text-gray-500 font-semibold ">Vous beneficiarais de quelques avantages liées à votre commande</p>
-  </div>
-  <div id="Avantage">
-      <ul>
-      ${listArray}
-      </ul>
-  </div>
-  <div id="BtnReserver">
-      <button class="p-2 w-full  h-auto bg-blue-500 rounded font-semibold text-white">Reserver</button>
-  </div>
-</div>
-    `
-  }
- 
-}
-
-function GetDetailsCard(array,mainContainer){   
-  let container = mainContainer;
- 
-  Array.from(container.children).forEach((elements)=>{
-  elements.addEventListener("click", ()=>{
-    let title = document.getElementById('title');
-    let img =  document.getElementById('Preview');
-    let description = document.getElementById('describe');
-    console.log(description);
-    let equipement = document.getElementById('cardContainer');
-    let tarif = document.getElementById('ListOfCard');
-    let commentaire = document.getElementById('Commentairebody');
-    // ajouter un titre à la page
-    title.innerHTML = `
-    <h1 class="text-xl md:text-3xl text-left font-bold">${array[elements.id].name}</h1>
-    <span class="text-sm font-semibold text-blue-500">${array[elements.id].adresse} Très bonne emplacement</span>
-    <div class="flex">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-yellow-500">
-     <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-    </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-yellow-500">
-    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-    </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-yellow-500">
-    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-    </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-yellow-500">
-     <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-    </svg>
- </div>
-    `;
-   
-    // ajouter les images
-    img.innerHTML = `<img src="${array[elements.id].image}" class="w-full h-[300px] md:h-[500px] w- rounded-xl object-cover">`;
-    
-    // ajouter une description
-    description.innerHTML =`<p class="line-clamp-[10] md:line-clamp-none text-justify">${array[elements.id].description}</p>`;
-
-    // ajouter les cartes contenants les équipements
-    EquipementCard(array[elements.id].equipement,equipement);
-
-    //ajouter les tarifs 
-    ReservationCard(array[elements.id],tarif)
-
-    //ajouter les commentaires 
-    CommentaireCard(array,commentaire);
-    // change display
-    const bool = false;
-    Display(Details,bool);
-    Recherche.classList.remove('flex');
-    Recherche.classList.add('hidden');
-    aboutUs.classList.remove('hidden');
-    aboutUs.classList.add('flex');
-
-
-
-  });
-})
-}
-
-function CommentaireCard(array,mainCardContainer){
-  let mainContainer = mainCardContainer; 
-  mainContainer.innerHTML =` `; 
-  for(let i=array.length-1; i < array.length; i++){
-       mainContainer.innerHTML +=`
-        <div class="w-[310.5px] bg-white md:w-[300.5px] h-[200px] mt-5 flex flex-col  items-center border shadow rounded-2xl p-4 transition-all hover:scale-90 ">
-        <!--card header-->
-        <div class="flex gap-5 items-center w-[100%] h-[40%]">
-           <div class="w-[30px] h-[30px] rounded-3xl bg-red-500 p-5 flex justify-center items-center text-lg font-semibold text-white">JB</div>
-            <h1 class="text-base font-semibold">Jafred Bukulu</h1>
-            <hr>
-        </div>
-        
-        <!-- card body -->
-         <div class=" w-[100%] h-[50%] flex flex-col items-center justify-center">
-            <p class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod debitis sit fuga similique commodi earum iste reprehenderit dolorum quibusdam ipsa?
-            </p>
-         </div>
-     </div>
-       `
-
+  if(mainContainer){
+    for(let i = 0; i < array.length; i++){
+      mainContainer.innerHTML += `
+      <!-- card -->
+      <div class="w-full lg:w-10/12 h-[180px] md:h-[220px] bg-blue-500 flex justify-between items-center p-5 rounded-3xl border shadow">
+              <div class="">
+                  <img src="/assets/img/55b8d8b9188fd6fbe921c59226474a0c-removebg.png" class="hidden md:flex w-[200px]">
+              </div>
+              <div class="">
+                  <h1 class=" text-xl text-center text-white font-bold">${array[i].title}</h1>
+              <h2 class="line-clamp-1 text-sm text-gray-500 text-center font-semibold">${array[i].describe}</h2> 
+              </div>   
+          
+          </div>
+      `
+    }
   }
 }
 function TeamCard(array, htmlContainer){
   let mainContainer = htmlContainer;
-  for(let i = 0; i < array.length; i++){
-    mainContainer.innerHTML += `
-    <div class="swiper-slide flex flex-col justify-center min-w-[170px] w-[170px] md:w-[250px] md:min-w-[250px] h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow gap-5 transition-all hover:scale-90" id"teamCard">
-        <div id="img" class="flex justify-center ">
-            <img class="w-[100px] h-[100px] md:w-[150px] md:h-[150px] rounded-full object-cover flex flex-col gap-3" src="${array[i].img}" alt="">
-        </div>
-        <div id="body_Card">
-           <h1 class="text-center md:text-2xl font-bold">${array[i].name}</h1>
-           <h2 class="text-center text-sm font-semibold text-gray-400">${array[i].profession}</h2>
-        </div>
-    </div>
-    `
+  if(mainContainer){
+    for(let i = 0; i < array.length; i++){
+      mainContainer.innerHTML += `
+      <div class="swiper-slide flex flex-col justify-center min-w-[170px] w-[170px] md:w-[250px] md:min-w-[250px] h-[270px] md:h-[300px] rounded-2xl p-2 md:p-4 border shadow gap-5 transition-all hover:scale-90" id"teamCard">
+          <div id="img" class="flex justify-center ">
+              <img class="w-[100px] h-[100px] md:w-[150px] md:h-[150px] rounded-full object-cover flex flex-col gap-3" src="${array[i].img}" alt="">
+          </div>
+          <div id="body_Card">
+             <h1 class="text-center md:text-2xl font-bold">${array[i].name}</h1>
+             <h2 class="text-center text-sm font-semibold text-gray-400">${array[i].profession}</h2>
+          </div>
+      </div>
+      `
+    }
   }
 }
-function changeSlide(direction,ArrayHtmlElement,mainContainer){
-  const slides = ArrayHtmlElement;
-  currentSlide += direction;
-  
-  if(currentSlide < 0){
-    currentSlide = slides.length - 1;
-  }else if(currentSlide >= slides.length){
-    currentSlide = 0
-  }
-  const offset = -currentSlide * 100;
-  let carouselContainer = mainContainer;
-  carouselContainer.style.transform = `translateX(${offset}%)`;
-}
-function Display(ContainerToDisplay,Default){
-  let currentDisplay = home;
-  if(!Default){
-    main.classList.remove('flex');
-    main.classList.add('hidden');
-  }
-  currentDisplay.classList.remove('flex');
-  currentDisplay.classList.add('hidden');
-  ContainerToDisplay.classList.remove('hidden');
-  ContainerToDisplay.classList.add('flex');
-  currentDisplay = ContainerToDisplay;
-
-}
-
-
 
 SallecardsWithReduction(array_salle,SalleCardsReduction)
 Sallecards(array_salle,salleCardContainer);
 // show details of cards
-GetDetailsCard(array_salle,salleCardContainer);
-GetDetailsCard(array_salle,SalleCardsReduction);
+
 
 
 TeamCard(TeamInfo,TeamCardContainer)
@@ -706,77 +502,26 @@ ReductionCard(arrayReductionCard,reductionCards);
 
 //Add click event
 
-btnLogin.addEventListener("click", () =>{
-  let bool = true;
-  search.classList.remove('flex');
-  search.classList.add('hidden');
-  aboutUs.classList.remove('flex');
-  aboutUs.classList.add('hidden');
-  Details.classList.remove('flex');
-  Details.classList.add('hidden');
-  inscription.classList.remove('flex');
-  inscription.classList.add('hidden');
-  Recherche.classList.remove('flex');
-  Recherche.classList.add('hidden');
-  home.classList.remove('flex');
-  home.classList.add('hidden');
-  main.classList.remove('flex');
-  main.classList.add('hidden');
-  connexion.classList.remove('hidden');
-  connexion.classList.add('flex');
-  btnLogin.classList.remove('flex');
-  btnLogin.classList.add('hidden');
-  btnSignUp.classList.remove('hidden');
-  btnSignUp.classList.add('flex');
-  AddSalle.classList.remove('flex');
-  AddSalle.classList.add('hidden');
-  
-});
-btnSignUp.addEventListener("click", () =>{
-  btnSignUp.classList.remove('flex');
-  btnSignUp.classList.add('hidden');
-  search.classList.remove('flex');
-  search.classList.add('hidden');
-  aboutUs.classList.remove('flex');
-  aboutUs.classList.add('hidden');
-  Details.classList.remove('flex');
-  Details.classList.add('hidden');
-  connexion.classList.remove('flex');
-  connexion.classList.add('hidden');
-  Recherche.classList.remove('flex');
-  Recherche.classList.add('hidden');
-  home.classList.remove('flex');
-  home.classList.add('hidden');
-  main.classList.remove('flex');
-  main.classList.add('hidden');
-  inscription.classList.remove('hidden');
-  inscription.classList.add('flex');
-  btnLogin.classList.remove('hidden');
-  btnLogin.classList.add('flex');
-  AddSalle.classList.remove('flex');
-  AddSalle.classList.add('hidden');
-});
+if(btnLogin){
+  btnLogin.addEventListener("click", () =>{
+    window.location.href = "/src/login.html";
+  });
+}
+if(btnSignUp){
+  btnSignUp.addEventListener("click", () =>{
+    window.location.href = "/src/registration.html";
+  });
+}
 
-salleCardContainer.addEventListener("click",()=>{
-  const arrayCard = salleCardContainer.children;
-  console.log(arrayCard)
-  changeSlide(1,arrayCard,salleCardContainer,0)
-})
-closePopup.addEventListener("click", ()=>{
-  popupSection.classList.remove("flex");
-  popupSection.classList.add("hidden");
-        
-});
+if(salleCardContainer){
+    const arrayCard = salleCardContainer.children;
+    Array.from(arrayCard).forEach((elmt) =>{
+        elmt.addEventListener("click", ()=>{
+          window.location.href = `/src/details.html?id=${elmt.id}`
+        })
+    })
 
-cancel.addEventListener("click", () =>
-  {
-   const ReservationPopup = document.getElementById("ReservationPopup");
-    ReservationPopup.classList.remove("flex");
-    ReservationPopup.classList.add("hidden");
-  } 
-);
-//carousel Team info 
-let currentSlide = 0;
+  let currentSlide = 0;
 PrecendentTeamCard.addEventListener("click",()=>{
  function changeSlide(direction){
   const ArrayHtmlElement = document.getElementById('containerUS');
@@ -892,53 +637,30 @@ PrecendentSalleCard.addEventListener("click",()=>{
  }
  changeSlide(1) 
  });
+}
+
+if(closePopup){
+  closePopup.addEventListener("click", ()=>{
+    popupSection.classList.remove("flex");
+    popupSection.classList.add("hidden");
+          
+  });
+}
+
+if(cancelReservationPopup){
+  cancelReservationPopup.addEventListener("click", () =>
+    {
+     const ReservationPopup = document.getElementById("ReservationPopup");
+      ReservationPopup.classList.remove("flex");
+      ReservationPopup.classList.add("hidden");
+    } 
+  );
+}
+//carousel Team info 
+
 
  // gerer la recherche dans le site
- btnSearchBar.addEventListener ("click",(e)=>{
-  e.preventDefault()
-  const Emplacement = document.getElementById("Emplacement");
-  const ReservationDate = document.getElementById("date");
-  const Nbreplace = document.getElementById("place");
-  if(Emplacement && ReservationDate && Nbreplace){
-    let SalleArrayFilter = array_salle.filter((elmt)=> (elmt.adresse.toLocaleLowerCase().includes(Emplacement.value.toLocaleLowerCase()) && elmt.place == Nbreplace.value ));
-    let ReservationArrayFilter = reservation.filter((elmt) => (elmt.status && elmt.date == ReservationDate));
-    console.log(SalleArrayFilter);
-   
-    aboutUs.classList.remove('flex');
-    aboutUs.classList.add('hidden');
-
-    Details.classList.remove('flex');
-    Details.classList.add('hidden');
-    
-    inscription.classList.remove('flex');
-    inscription.classList.add('hidden');
-
-    Recherche.classList.remove('hidden');
-    Recherche.classList.add('flex'); 
-    
-    home.classList.remove('flex');
-    home.classList.add('hidden');
-
-    main.classList.remove('flex');
-    main.classList.add('hidden');
-
-    connexion.classList.remove('flex');
-    connexion.classList.add('hidden');
-  
-    AddSalle.classList.remove('flex');
-    AddSalle.classList.add('hidden');
-
-    inscription.classList.remove('flex');
-    inscription.classList.add('hidden');
-
-    // ajouter les éléments de la recherche
-    Sallecards(SalleArrayFilter,Recherche);
-    SallecardsWithReduction(SalleArrayFilter,Recherche);
-
-    //Ajouter le getDetails 
-    GetDetailsCard(SalleArrayFilter,Recherche)
-  }
- })
+ 
  const swiper = new Swiper('.swiper', {
   // Optional parameters
   direction: 'horizontal',
@@ -1005,3 +727,19 @@ const swiper3 = new Swiper('.swiper3', {
     el: '.swiper-scrollbar',
   },
 });
+// gerer la recherche
+const searchs = document.getElementById("searchs");
+if(searchs){
+  searchs.addEventListener("click",(e)=>{
+    const emplacement = document.getElementById("Emplacementhome").value;
+    const date  = document.getElementById("datehome").value;
+    const place = document.getElementById("placehome").value;
+    const Recherche = {
+      emplacement:emplacement,
+      date: date,
+      place :place
+    };    
+    const RechercheStringify = JSON.stringify(Recherche);
+    localStorage.setItem('recherche', RechercheStringify);
+  })
+}

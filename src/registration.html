@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoMoReservation|Registration</title>
+    <link rel="stylesheet" href="/dist/output.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="lg:max-w-5xl max-w-xl md:max-w-3xl m-auto">
+    <header class="flex flex-wrap w-[100%] justify-between items-center px-3 py-3 border-b-2">
+        <div id="logo">
+            <h1 ><a class="text-2xl font-bold" href="">MoMo Reservation</a></h1>
+        </div>
+        <nav>
+            <ul class="hidden gap-5 font-semibold">
+                <li  id="AddSalle"><a href="/src/Add.html" class="hidden lg:flex cursor-pointer transition-all font-semibold lg:hover:text-orange-300">Ajouter votre établissements</a></li>
+            </ul>
+        </nav>
+        <div id="idLogin">
+            <div id="idClient" class="flex cursor-pointer gap-3 justify-center items-center">
+            </div>
+            <div id="connexion" class="flex gap-3">
+                <button class="w-fit flex px-2 py-2 bg-blue-500 text-white lg:text-black lg:bg-white transition-all  rounded font-semibold lg:border lg:border-black lg:hover:bg-orange-400 hover:text-white" id="login">connexion</button>
+                <button class="hidden w-fit l  px-2 py-2  bg-blue-500 text-white rounded font-semibold" id="signUp">Inscription</button>
+                
+            </div>
+        </div>
+    </header>
+    
+    <section id="inscription" class="w-full flex justify-center items-center">
+        <div class="w-full md:w-[80%] h-[500px] p-4  flex flex-col gap-4">
+            <h1 class="text-3xl text-center font-semibold">Inscription</h1>
+            <form class="w-full flex flex-col p-3  gap-5 justify-center items-center">
+              <div class="w-full  flex justify-center items-center gap-3 md:w-[55%] ">
+                <input type="text" required placeholder="Nom complet" class="flex-1 w-[20%]  p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="RegistrationName">
+              </div>
+             <div class="w-full flex justify-center items-center gap-3 md:w-[55%] ">
+                <input type="number" required placeholder=" Telephone" class="flex-1 w-[20%] md:w-[40%] p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="RegistrationNumber">
+                <input type="email" required placeholder="  E-mail" class="flex-1 w-[20%] md:w-[40%] p-3 h-[40px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left" id="Registrationemail">
+             </div>
+                <div class="flex justify-center items-center w-full ">
+                    <input type="password" required placeholder="Password" class="w-full md:w-[55%]  p-3  h-[40px] rounded  outline outline-[1.75px] outline-blue-500  bg-transparent text-left" id="Registrationpassword">
+                </div>
+                <button type="submit" class="p-3  h-auto w-full bg-blue-500  rounded font-semibold text-white md:w-[55%]" id="signup">S'inscrire</button>
+            </form>
+        
+        </div>
+    </section>
+    <script  src="/dist/bundle.js"></script>
+</body>
+</html>

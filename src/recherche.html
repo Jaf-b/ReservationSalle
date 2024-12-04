@@ -6,59 +6,57 @@
     <title>Document</title>
     <link rel="stylesheet" href="/dist/output.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/node_modules/swiper/swiper-bundle.min.css">
     <style>
   
     </style>
 </head>
-<body class=" lg:max-w-5xl sm:max-w-xl md:max-w-3xl m-auto flex justify-center items-center ">
-    <link rel="stylesheet" href="/node_modules/swiper/swiper-bundle.min.css">
-    <div class="swiper w-full">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper w-full flex gap-5">
-          <!-- Slides -->
-          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
-          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
-          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
-          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
-          <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
-           <div class="swiper-slide"><img class="min-w-full object-cover" src="/assets/img/JAf.jpg" alt="" srcset=""></div>
-          ...
+<body class=" lg:max-w-5xl sm:max-w-xl md:max-w-3xl m-auto ">
+  <header class="flex flex-wrap w-[100%] justify-between items-center px-3 py-3 border-b-2">
+    <div id="logo">
+        <h1 ><a class="text-2xl font-bold" href="">MoMo Reservation</a></h1>
+    </div>
+    <nav>
+        <ul class="flex gap-5 font-semibold">
+            <li  id="AddSalle"><a href="/src/Add.html" class="hidden lg:flex cursor-pointer transition-all font-semibold lg:hover:text-orange-300">Ajouter votre établissements</a></li>
+        </ul>
+    </nav>
+    <div id="idLogin">
+        <div id="idClient" class="flex cursor-pointer gap-3 justify-center items-center">
         </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination hidden lg:flex"></div>
-      
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      
-        <!-- If we need scrollbar -->
-        <div class="swiper-scrollbar hidden"></div>
-      </div>
- <script type="module" >
-  import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+        <div id="connexion" class="flex gap-3">
+           <a href="/src/registration.html">
+            <button class="w-fit flex px-2 py-2 bg-blue-500 text-white lg:text-black lg:bg-white transition-all  rounded font-semibold lg:border lg:border-black lg:hover:bg-orange-400 hover:text-white" id="login">connexion</button>
+           </a>
+        </div>
+    </div>
+</header>
+  <section id="loginPopup" class="hidden justify-center items-center absolute lg:left-[600px] left-[-80px]">
+    <div  class="ml-[180px] lg:ml-[300px] w-[280px] h-[280px] bg-white rounded flex flex-col items-center justify-center gap-5 p-auto shadow border">
+        <div id="close" class="ml-48 cursor-pointer flex justify-center items-center w-8 h-8 bg-red-500">
+            <span>x</span>
+        </div>
+        <div id="popup" class="flex  flex-col items-center justify-center"></div>
+        <div>
+             <button id="SignOut" class=" flex p-3 w-max h-auto bg-blue-500 rounded font-semibold text-white">SignOut</button>
+        </div>
+    </div>
+</section>
 
-  const swiper = new Swiper('.swiper', {
-  // Optional parameters
-  direction: 'horizontal',
-  loop: true,
+  <section id="searchBar" class="w-full mt-10 lg:mb-0 mb-10 flex justify-center items-center">
+    <!---------------------------search bar--------------------------------->
+    <div id="searchbar" class="flex flex-col w-11/12 gap-3 px-5 py-10 border shadow rounded">
+           <input type="text"  required placeholder="Emplacement" id="Emplacement" class="p-3 flex-1 w-[100%] h-[45px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left font-semibold">
+       <input type="date" required placeholder="Date de reservation" id="date" class=" p-3 flex-1  w-[100%] h-[45px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left font-semibold">
+       <input type="number" required placeholder="Nombre de Place" id="place" class="flex-1 p-3  w-[100%] h-[45px] rounded outline outline-[1.75px]  outline-blue-500  bg-transparent text-left font-semibold">
+       <button type="submit" class=" flex flex-1 p-3 w-[100%] h-[45px]  bg-blue-500 rounded font-semibold text-white items-center justify-center" id="search"> Rechercher</button>
 
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-  },
+   </div>
+<!---------------------------end search bar--------------------------------->
+</section>
+  <section id="Recherche" class="w-full flex mt-11 gap-2 md:gap-5 flex-wrap justify-center items-center ">
 
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: '.swiper-scrollbar',
-  },
-});
-</script>
+  </section>
+    <script src="recherche.js"></script>
+    <script src="/dist/bundle.js"></script>
 </body>
 </html>
