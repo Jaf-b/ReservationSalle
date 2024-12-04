@@ -490,7 +490,14 @@ function TeamCard(array, htmlContainer){
     }
   }
 }
-
+if(SalleCardsReduction){
+ const arraychild = Array.from(SalleCardsReduction.children);
+ arraychild.forEach((elmt) =>{
+  elmt.addEventListener("click",()=>{
+    window.location.href = `/src/details.html?id=${elmt.id}`;
+  })
+ })
+}
 SallecardsWithReduction(array_salle,SalleCardsReduction)
 Sallecards(array_salle,salleCardContainer);
 // show details of cards
