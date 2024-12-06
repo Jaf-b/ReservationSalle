@@ -253,7 +253,7 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
       // connexion avec google
   google_login.addEventListener('click', (e) => {
     signInWithPopup(auth, provider).then(async (result) => {
-      window.location.href = "/index.html";
+        history.back()
         const uid = result.user.uid;
         const displayName = result.user.displayName;
         const email = result.user.email;
@@ -284,7 +284,7 @@ const SuivantSalleReductionCard = document.getElementById("SalleReductionCardsui
         // Signed up
         const uid = userCredential.user.uid;
         newUser({displayName,email,uid,phoneNumber});
-        window.location.href = "/index.html";
+        history.back();
         sendSignInLinkToEmail(auth,email);
       })
       .catch((error) => {
@@ -408,7 +408,7 @@ function SallecardsWithReduction(array,htmlContainer){
         <div id="body_Card">
             <h1 class="text-xl md:text-xl font-bold line-clamp-1">${array[i].name}</h1> 
             <div class="flex flex-col md:items-center md:flex-row md:justify-between md:text-xl font-semibold" id="svg">
-                <h1 class="flex gap-3 text-lg md:text-2xl font-bold"><span class="line-through font-light">${array[i].price}</span> ${(array[i].price*array[i].reduction)/100} $</h1>
+                <h1 class="flex gap-3 text-lg md:text-2xl font-bold"><span class="line-through font-light">${array[i].price}</span> ${array[i].price-((array[i].price*array[i].reduction)/100)} $</h1>
                 <div class="flex gap-2">
                     4.5 
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-yellow-500">

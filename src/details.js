@@ -186,5 +186,11 @@ const params = new URLSearchParams(url.search);
 // recuperer les info dans l'url
  const id = params.get('id');
 
+ // rediriger sur la page de reservation lorsqu'on clique sur le bouton reserver
+ const reservationLink = document.getElementById("reservationLink");
+ reservationLink.addEventListener("click", (e)=>{
+  e.preventDefault()
+  window.location.href = `/src/reservation.html?id=${id}`
+ })
  // afficher les details
  GetDetailsCard(arraySalle,Details,id)
